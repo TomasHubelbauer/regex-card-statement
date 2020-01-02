@@ -4,14 +4,12 @@ This is a regular expression for credit or debit card bank statement lines in
 Czech:
 
 ```regex
-(Nákup|Kredit|Výběr z bankomatu): (?<merchant>.+), ( (?<address>.*), (?<zip>.*), )?(?<country>\w{2,3}), dne (?<day>[123]?\d).(?<month>1?\d).(?<year>2\d{3}), částka  (?<amount>\d+.\d{2}) (?<currency>\w{3})
+(Nákup|Kredit|Výběr z bankomatu): (?<merchant>.+), (?<country>\w{2,3}), dne (?<day>[123]?\d).(?<month>1?\d).(?<year>2\d{3}), částka  (?<amount>\d+.\d{2})( (?<currency>\w{3}))?
 ```
 
 - `(Nákup|Kredit|Výběr z bankomatu): ` is a constant identifying a payment card statement line
-- `(?<merchant>.+), ` is the merchant provided name string
-- ` ` another spaces separating the marchant provided name and address strings if available
-  - `(?<address>.*), ` is the merchant provided address string
-  - `(?<zip>.*), ` is the merchant provided postal code (free form)
+- `(?<merchant>.+), ` is the merchant provided string (name, address, postal code)
+  - *Sometimes*, the name and address are separated with two spaces
 - `(?<country>\w{2,3}), ` is a two- or three-letter ISO country code
 - `dne ` is a constant preceeding the date triplet
 - `(?<day>[123]?\d).` day number limited to 0-39 to avoid false positives
