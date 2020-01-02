@@ -4,10 +4,10 @@ This is a regular expression for credit or debit card bank statement lines in
 Czech:
 
 ```regex
-Nákup: (?<merchant>.+),  (?<address>.*), (?<zip>.*), (?<country>\w{3}), dne (?<day>[123]?\d).(?<month>1?\d).(?<year>2\d{3}), částka  (?<amount>\d+.\d{2}) (?<currency>\w{3})
+(Nákup|Kredit): (?<merchant>.+),  (?<address>.*), (?<zip>.*), (?<country>\w{3}), dne (?<day>[123]?\d).(?<month>1?\d).(?<year>2\d{3}), částka  (?<amount>\d+.\d{2}) (?<currency>\w{3})
 ```
 
-- `Nákup: ` is a constant identifying a payment card statement line
+- `(Nákup|Kredit): ` is a constant identifying a payment card statement line
 - `(?<merchant>.+),  ` is the merchant provided name string
 - `  ` two spaces separating the marchant provided name and address strings
 - `(?<address>.*), ` is the merchant provided address string
