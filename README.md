@@ -4,15 +4,15 @@ This is a regular expression for credit or debit card bank statement lines in
 Czech:
 
 ```regex
-(Nákup|Kredit): (?<merchant>.+),  (?<address>.*), (?<zip>.*), (?<country>\w{3}), dne (?<day>[123]?\d).(?<month>1?\d).(?<year>2\d{3}), částka  (?<amount>\d+.\d{2}) (?<currency>\w{3})
+(Nákup|Kredit|Výběr z bankomatu): (?<merchant>.+), ( (?<address>.*), (?<zip>.*), )?(?<country>\w{2,3}), dne (?<day>[123]?\d).(?<month>1?\d).(?<year>2\d{3}), částka  (?<amount>\d+.\d{2}) (?<currency>\w{3})
 ```
 
-- `(Nákup|Kredit): ` is a constant identifying a payment card statement line
-- `(?<merchant>.+),  ` is the merchant provided name string
-- `  ` two spaces separating the marchant provided name and address strings
-- `(?<address>.*), ` is the merchant provided address string
-- `(?<zip>.*), ` is the merchant provided postal code (free form)
-- `(?<country>\w{3}), ` is a three-letter ISO country code
+- `(Nákup|Kredit|Výběr z bankomatu): ` is a constant identifying a payment card statement line
+- `(?<merchant>.+), ` is the merchant provided name string
+- ` ` another spaces separating the marchant provided name and address strings if available
+  - `(?<address>.*), ` is the merchant provided address string
+  - `(?<zip>.*), ` is the merchant provided postal code (free form)
+- `(?<country>\w{2,3}), ` is a two- or three-letter ISO country code
 - `dne ` is a constant preceeding the date triplet
 - `(?<day>[123]?\d).` day number limited to 0-39 to avoid false positives
 - `(?<month>1?\d).` month number limited to 0-19 to avoid false positives
@@ -22,9 +22,3 @@ Czech:
 - `(?<currency>\w{3})` is the three letter currency code
 
 ## To-Do
-
-### Update to handle ATM withdrawal lines
-
-`Výběr z bankomatu: PHARRO, ULICE EVROPSKÁ, PRAHA 6, 160 00, CZ, dne 00.00.2000, částka  0000.00 CZK`
-
-Doesn't have the double space separating the merchant and the address so needs a bit more care.
