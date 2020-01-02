@@ -20,3 +20,11 @@ Czech:
 - `, částka  ` is a constant preceeding the amount and currency code
 - `(?<amount>\d+.\d{2}) ` is the amount with two decimal places precision
 - `(?<currency>\w{3})` is the three letter currency code
+
+## To-Do
+
+### Update to handle ATM withdrawal lines
+
+`Výběr z bankomatu: PHARRO, ULICE EVROPSKÁ, PRAHA 6, 160 00, CZ, dne 00.00.2000, částka  0000.00 CZK`
+
+Doesn't have the double space separating the merchant and the address so needs a bit more care.
